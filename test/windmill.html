@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/velocity/1.4.1/velocity.min.js"></script>
+    <script>
+        var transform = function(element, value, key) {
+            key = key || 'Transform';
+            ["Moz", "O", "Ms", "Webkit", ""].forEach(function(prefix) {
+                element.style[prefix + key] = value;
+            })
+            return element;
+        }
+
+        $(function() {
+            var deg = -45, i = 1;
+//            $("#container").click(function() {
+//                console.log($(this)[0]);
+//                transform($(this)[0], "rotateY(" + (deg * i++) + "deg)")
+//            });
+
+//            var timer = setInterval(function() {
+////                console.log($("#container")[0]);
+//                transform($("#container")[0], "rotateY(" + (deg * i++) + "deg)")
+//            },1000);
+
+            function roll() {
+                console.log('in roll');
+                var timer = setInterval(function() {
+                    console.log('in roll timer');
+                    transform($("#container")[0], "rotateY(" + (deg * i++) + "deg)")
+                },1000);
+                return timer;
+            }
+
+            var tim;
+            tim = roll();
+            $('#container').hover(function() {
+                console.log('hoving')
+                clearInterval(tim);
+            },function() {
+                tim = roll();
+            })
+        });
+    </script>
+
+    <style>
+        #stage {
+            width: 900px;
+            min-height: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 100px 50px;
+            perspective: 800px;
+            -webkit-perspective: 800px;
+            -moz-perspective: 800px;
+            -ms-transform: perspective(800px);
+            position: relative;
+        }
+        #container {
+            width: 120px;
+            height: 100px;
+            margin-left: -64px;
+            -webkit-transition: -webkit-transform 1s;
+            -moz-transition: -moz-transform 1s;
+            -ms-transition: -ms-transform 1s;
+            -o-transition: -o-transform 1s;
+            transition: transform 1s;
+            -webkit-transform-style: preserve-3d;
+            -moz-transform-style: preserve-3d;
+            -ms-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            position: absolute;
+            left: 50%;
+            text-align: center;
+        }
+
+        #container div{
+            width: 120px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+            position: absolute;
+            bottom: 0;
+        }
+
+        .d1 {
+            -webkit-transform: rotateY(0deg) translateZ(115.4px);
+            -moz-transform: rotateY(0deg) translateZ(115.4px);
+            -ms-transform: rotateY(0deg) translateZ(115.4px);
+            -o-transform: rotateY(0deg) translateZ(115.4px);
+            transform: rotateY(0deg) translateZ(115.4px);
+        }
+        .d2 {
+            -webkit-transform: rotateY(90deg) translate3d(0, 0, 115.4px);
+            -moz-transform: rotateY(90deg) translate3d(0, 0, 115.4px);
+            -ms-transform: rotateY(90deg) translate3d(0, 0, 115.4px);
+            -o-transform: rotateY(90deg) translate3d(0, 0, 115.4px);
+            transform: rotateY(90deg) translate3d(0, 0, 115.4px);
+        }
+        .d3 {
+            -webkit-transform: rotateY(180deg) translate3d(0, 0, 115.4px);
+            -moz-transform: rotateY(180deg) translate3d(0, 0, 115.4px);
+            -ms-transform: rotateY(180deg) translate3d(0, 0, 115.4px);
+            -o-transform: rotateY(180deg) translate3d(0, 0, 115.4px);
+            transform: rotateY(180deg) translate3d(0, 0, 115.4px);
+        }
+        .d4 {
+            -webkit-transform: rotateY(270deg) translate3d(0, 0, 115.4px);
+            -moz-transform: rotateY(270deg) translate3d(0, 0, 115.4px);
+            -ms-transform: rotateY(270deg) translate3d(0, 0, 115.4px);
+            -o-transform: rotateY(270deg) translate3d(0, 0, 115.4px);
+            transform: rotateY(270deg) translate3d(0, 0, 115.4px);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="stage">
+        <div id="container">
+            <div class="d1">导航1</div>
+            <div class="d2">导航2</div>
+            <div class="d3">导航3</div>
+            <div class="d4">导航4</div>
+        </div>
+    </div>
+</body>
+</html>

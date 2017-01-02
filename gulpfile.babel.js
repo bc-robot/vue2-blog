@@ -15,6 +15,7 @@ import run from 'gulp-run'
 
 const DEV_PORT = 3000,PROD_PORT = 8300
 gulp.task('serve', cb => {
+    let host = '192.168.1.100';
     env({
         vars: {
             'NODE_ENV': 'development'
@@ -22,9 +23,9 @@ gulp.task('serve', cb => {
     });
     let webpackConfig = require('./build/webpack.dev.conf');
     let myConfig = Object.create(webpackConfig);
-    myConfig.entry.unshift('webpack/hot/dev-server');
-    // myConfig.entry.unshift('webpack/hot/only-dev-server');
-    myConfig.entry.unshift('webpack-dev-server/client?http://localhost:' + DEV_PORT);
+    // myConfig.entry.unshift('webpack/hot/dev-server');
+    myConfig.entry.unshift('webpack/hot/only-dev-server');
+    myConfig.entry.unshift('webpack-dev-server/client?http://'+host+':' + DEV_PORT);
 
     new WebpackDevServer(webpack(myConfig), {
         noInfo: false,
@@ -35,10 +36,10 @@ gulp.task('serve', cb => {
         stats: {
             colors: true
         }
-    }).listen(DEV_PORT, 'localhost', err => {
+    }).listen(DEV_PORT, host, err => {
         if(err) throw new gutil.PluginError('webpack-dev-server', err);
-        gutil.log('[webpack-dev-server]', '==> http://localhost:' + DEV_PORT);
-        open('http://localhost:' + DEV_PORT);
+        gutil.log('[webpack-dev-server]', '==> http://'+host+':' + DEV_PORT);
+        open('http://'+host+':' + DEV_PORT);
     });
 });
 

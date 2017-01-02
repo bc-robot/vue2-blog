@@ -1,26 +1,35 @@
 <template>
-  <div class="jumbotron">
-    <h1>任务追踪</h1>
-    <p>
-      <strong>
-        <router-link to="/time-entries">创建一个任务</router-link>
-      </strong>
-    </p>
-  </div>
+        <div class="b-bcard-box">
+            <bcard></bcard>
+            <bcard></bcard>
+            <bcard></bcard>
+            <bcard></bcard>
+            <bcard></bcard>
+        </div>
 </template>
 <style>
-
 </style>
 <script>
+    import bcard from './bcard/bcard.vue'
 
     export default{
+        props: ['name'],
         data(){
-            return{
-
+            return {
+                visible: true
             }
         },
-        components:{
-
-        }
+        components: {
+            bcard
+        },
+//        beforeRouteEnter(to, from, next) {
+//            console.log('route in - - - ');
+//            next(vm => {
+//                vm.data
+//            })
+//        },
+//        beforeRouteLeave(to, from, next) {
+//            console.log('route out - - - ');
+//        }
     }
 </script>
